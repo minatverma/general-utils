@@ -4,6 +4,7 @@ import pandas as pd
 import pyodbc
 from pandas.util.testing import assert_frame_equal
 import smtplib
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import datetime
 
@@ -103,10 +104,11 @@ def close_connection(conn):
     conn.close()
 
 def send_mail():
-    fp = open('test.html', 'rb')
-    msg = MIMEText(fp.read())
-    fp.close()
+    body = open('test.html', 'rb').read()
+    msg = MIMEMultipart('alternative')
     msg['Subject'] = 'Validation Result on ' + datetime.date.today().strftime('%B %d, %Y')
+    HTML_BODY = MIMEText(body.encode('utf-8'), 'html','utf-8')
+    msg.attach(HTML_BODY)
     s = smtplib.SMTP('relay.apple.com')
     s.sendmail('do_not_reply@apple.com', 'minat_verma@apple.com', msg.as_string())
     s.quit()
