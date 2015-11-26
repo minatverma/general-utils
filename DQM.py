@@ -106,11 +106,11 @@ def compare_data():
       
  
 def create_connection_nwk():
-    conn = pyodbc.connect("DRIVER=Vertica;SERVER=dbgbivegap-nwk.corp.apple.com;DATABASE=GBIVEGAP;PORT=5433;UID=mystore_user;PWD=Find_me_usr#@nwk")
+    conn = pyodbc.connect("DRIVER=Vertica;SERVER=myserver;DATABASE=mydb;PORT=5433;UID=uid;PWD=pwd")
     return conn
 
 def create_connection_redwood():
-    conn = pyodbc.connect("DRIVER=Teradata;DBCNAME=redwood.corp.apple.com;UID=c1063159;PWD=Apple@1234;QUIETMODE=YES", autocommit=True,unicode_results=True)
+    conn = pyodbc.connect("DRIVER=Teradata;DBCNAME=tddb;UID=uid;PWD=pwd;QUIETMODE=YES", autocommit=True,unicode_results=True)
     return conn
 
 def close_connection(conn):
@@ -124,8 +124,8 @@ def send_mail():
     msg['Subject'] = 'Validation Result on ' + datetime.date.today().strftime('%B %d, %Y')
     HTML_BODY = MIMEText(body.encode('utf-8'), 'html','utf-8')
     msg.attach(HTML_BODY)
-    s = smtplib.SMTP('relay.apple.com')
-    s.sendmail('do_not_reply@apple.com', 'minat_verma@apple.com', msg.as_string())
+    s = smtplib.SMTP('server')
+    s.sendmail('abc@email.com', 'myemail_email.com', msg.as_string())
     s.quit()
 
 if __name__ == '__main__' :
