@@ -76,11 +76,11 @@ def ReorderFile():
   difference_order_2 = list(set(old_order) -set( new_order_array))
   if difference_order_1:
     fprint("\nPlease review new column order")
-    fprint("\tIt consist of new numbers \t" + str(difference_order_1) )
+    fprint("\n\tIt consist of new numbers \t" + str(difference_order_1) )
   if difference_order_2:
     fprint("\t\tMissing numbers \t" + str(difference_order_2) )
   if len(set(new_order_array)) == len(set(old_order)) and len(new_order_array) == len(old_order):
-    fprint ("\nEverything okay. Proceeding with column reorder. Please wait a while ...")
+    fprint ("\nEverything okay. Proceeding with column re-order. Please wait a while ...")
     file.seek(0)
     if ',' in file.readline():
       delim = ','
@@ -95,9 +95,9 @@ def ReorderFile():
     except IOError as e:
       print 'Operation failed: %s' % e.strerror
   else :
-    fprint("\nCheck elements of new array")
+    fprint("\nCheck the new column order once again")
   close_file(file)
-  fprint("\n\nRe-ordering of column done .\n")
+  fprint("\n\nRe-ordering of columns done. Name of file is 'out.csv' in current path.\n")
 
 
 def validateDelimiter(option,file, DataCaptured):
